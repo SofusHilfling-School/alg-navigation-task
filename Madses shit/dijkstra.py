@@ -11,6 +11,7 @@ class Graph:
         self.edges[v][u] = weight
 
     def dijkstra(graph, start_vertex):
+        # set all distances to infinity
         D = {v:float('inf') for v in range(graph.v)}
         D[start_vertex] = 0
 
@@ -21,14 +22,21 @@ class Graph:
             (dist, current_vertex) = pq.get()
             graph.visited.append(current_vertex)
 
+            # loop through all nodes in the graph
             for neighbor in range(graph.v):
+                # if node is edge to current_node e.i. it exists (weight is set)
                 if graph.edges[current_vertex][neighbor] != -1:
+                    # get weight
                     distance = graph.edges[current_vertex][neighbor]
+                    # check if neighbor has been visited before
                     if neighbor not in graph.visited:
                         old_cost = D[neighbor]
+                        # calculate new distance
                         new_cost = D[current_vertex] + distance
+                        # check if new distance is less than old 
                         if new_cost < old_cost:
                             pq.put((new_cost, neighbor))
+                            # update the distance between the two nodes
                             D[neighbor] = new_cost
         return D
         
