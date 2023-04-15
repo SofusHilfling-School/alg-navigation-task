@@ -11,7 +11,6 @@ class DepthFirstSearch:
         self.__dfs(g, start)
 
     def __dfs(self, g: Graph, v: int) -> None:
-        print(v)
         self.__marked[v] = True
         self.count += 1
         for w in g.edges[v]:

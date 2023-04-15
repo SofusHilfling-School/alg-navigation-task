@@ -4,7 +4,7 @@ from pq import IndexMinPrioityQueue
 
 class Dijkstra:
     distTo: dict[int, float]
-    edgeTo: list[Edge]
+    edgeTo: dict[int, Edge]
     
     def __init__(self, g: Graph, start: int) -> None:
         'Find shortest path from start node to all other nodes in graph.'
