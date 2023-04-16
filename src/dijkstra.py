@@ -3,10 +3,34 @@ from graph import Edge, Graph
 from pq import IndexMinPrioityQueue
 
 class Dijkstra:
+    """
+    Class that represents Dijkstras algorithm for graph pathfinding
+    
+    Attributes
+    ----------
+    distTo : dict[int, float]
+        dictionary contains the distance to a node
+    edgeTo : dict[int, float]
+        dictionary contains the edges to nodes
+    
+    Functions
+    ---------
+    hasPathTo(self, v: int) -> bool
+
+    pathTo(self, v: int) -> list[Edge] | None
+    """
     distTo: dict[int, float]
     edgeTo: dict[int, Edge]
     
     def __init__(self, g: Graph, start: int) -> None:
+        """
+        Parameters
+        ----------
+        g
+            a graph object
+        start
+            start position/node in the graph
+        """
         'Find shortest path from start node to all other nodes in graph.'
         self.edgeTo = {v: None for v in g.nodes.keys()}
         self.distTo = {v:float('inf') for v in g.nodes.keys()}
