@@ -32,16 +32,23 @@ class DepthFirstSearch:
         start
             start position/node in the graph
         """
+        # sets all nodes in a graph to be unvisited, we haven't visited any nodes and we need to know which we havn't been to
         self.__marked = {key: False for key in g.nodes.keys()}
+        # counter for number of nodes algorithm has been through, we need the shortest one
         self.count = 0
         self.__dfs(g, start)
 
     def __dfs(self, g: Graph, v: int) -> None:
+        # sets node v to true, we have now visited it
         self.__marked[v] = True
+        # counter goes up by 1
         self.count += 1
+        # goes through the edges that node v has
         for w in g.edges[v]:
+            # if we havn't been at one of the edges v has then go to that node and start over
             if not self.__marked[w.to_node]:
                 self.__dfs(g, w.to_node)
 
+    #checks if node v has been visited
     def marked(self, v: int) -> bool:
         return self.__marked[v]
