@@ -1,5 +1,5 @@
 
-- [ ] comment each line for each algorithm
+- [x] comment each line for each algorithm
   - what does line do
   - why is it nessesary
 - [ ] make design document in a readme file
