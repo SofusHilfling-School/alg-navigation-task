@@ -50,7 +50,7 @@ class Dijkstra:
                 # get the node that the edge is pointing to
                 w = e.to_node
                 # calculate new distance
-                new_dist = self.distTo[v] + e.distanceBetween
+                new_dist = self.distTo[v] + e.distance_between
                 # check if the new distance is less than the old
                 if self.distTo[w] > new_dist:
                     # update the distance between the two nodes
