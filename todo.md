@@ -8,10 +8,10 @@
   - [ ] simple explanation of each algorithm used in app
   - [ ] outline functionality of ui
 - [ ] add information to the node about what it is, like a city name or something
-- [ ] implement an additional graph traversal algorithm
+- [x] implement an additional graph traversal algorithm
 - [ ] cli ui
-  - [ ] prompt user for which algorithm they want to use
-  - [ ] have a prompt for starting navigation
+  - [x] prompt user for which algorithm they want to use
+  - [x] have a prompt for starting navigation
     - should include where user starts 
     - and where they want to end
     - print each step one by one with user pressing enter inbetween
