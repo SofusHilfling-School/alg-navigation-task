@@ -7,7 +7,7 @@
   - [ ] explain structure of `map.txt`
   - [ ] simple explanation of each algorithm used in app
   - [ ] outline functionality of ui
-- [ ] add information to the node about what it is, like a city name or something
+- [x] add information to the node about what it is, like a city name or something
 - [x] implement an additional graph traversal algorithm
 - [ ] cli ui
   - [x] prompt user for which algorithm they want to use
@@ -15,7 +15,7 @@
     - should include where user starts 
     - and where they want to end
     - print each step one by one with user pressing enter inbetween
-  - [ ] prompt for importing graph from txt file (`map.txt`)
+  - [x] prompt for importing graph from txt file (`map.txt`)
     - format should be 
       ```
       <from_node> <to_node> <distance_between>
