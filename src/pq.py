@@ -5,12 +5,11 @@ from typing import Any
 @dataclass(order=True)
 class PrioritizedItem:
     priority: float
-    item: str|int=field(compare=False)
+    item: None|int=field(compare=False)
 
     def __init__(self, priority : float, item: int) -> None:
         self.priority = priority
         self.item = item
-        pass
     
 
 class IndexMinPrioityQueue:
@@ -27,12 +26,10 @@ class IndexMinPrioityQueue:
         'Add a new item or update the priority of an existing item.'
         if key in self.entry_finder:
             entry: PrioritizedItem = self.entry_finder.pop(key)
-            entry.item = '<removed-task>'
+            entry.item = None
             self.count -= 1
         self.count += 1
-        entry = PrioritizedItem(priority, key) 
-        entry.priority = priority
-        entry.item = key
+        entry = PrioritizedItem(priority, key)
 
         self.entry_finder[key] = entry
         heappush(self.pq, entry)

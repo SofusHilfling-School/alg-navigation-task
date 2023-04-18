@@ -24,6 +24,8 @@ class Dijkstra:
     
     def __init__(self, g: Graph, start: int) -> None:
         """
+        Find shortest path from start node to all other nodes in graph.
+
         Parameters
         ----------
         g
@@ -31,7 +33,6 @@ class Dijkstra:
         start
             start position/node in the graph
         """
-        'Find shortest path from start node to all other nodes in graph.'
         # creates a dictionary of edges, we don't know the edges yet so they are set to none 
         self.edgeTo = {v: None for v in g.nodes.keys()}
         # creates a dictionary of distance(weight) for nodes and sets them to large value inf
@@ -61,7 +62,7 @@ class Dijkstra:
                     pq.push(w, new_dist)
 
     def hasPathTo(self, v: int) -> bool:
-        #'Checks whether a path between start node and node v exists.'
+        'Checks whether a path between start node and node v exists.'
         #If it doesn't exist we can't go that way
         return self.distTo[v] < float('inf')
     
@@ -70,14 +71,14 @@ class Dijkstra:
         #If to check if path exists if not it'll return none
         if not self.hasPathTo(v):
             return None
-        #list of paths
-        path = []
-        # a nodes edge to target node v 
+        # a list of edges representing a path between the start node and v
+        path: list[Edge] = []
+        # set the initial edge to the one pointing to v
         e = self.edgeTo[v]
         while e != None:
-            # putting the edge in the list of paths if there is a path
+            # add the edge pointing to the current node
             path.append(e)
-            # the edges from target node back to original node we are possibly not done with original node
+            # change e to the node the edge is pointing from
             e = self.edgeTo[e.from_node]
         return path
 
