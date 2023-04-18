@@ -14,7 +14,7 @@ class Edge:
     """
     to_node: int
     from_node: int
-    distance_between: float
+    distance_between: float = 0
 
     def __init__(self, to_node, from_node) -> None:
         """
@@ -28,8 +28,19 @@ class Edge:
         self.to_node = to_node
         self.from_node = from_node
 
+    def __str__(self) -> str:
+        return f"Edge(to_node={self.to_node}, from_node={self.from_node}, distance_between={self.distance_between})"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
 class Node:
-    pass
+    def __init__(self, key: int, name: str | None) -> None:
+        self.key = key
+        self.name = name
+    
+    def __str__(self) -> str:
+        return f"Node(key={self.key}, name='{self.name}')"
 
 class Graph:
     """
@@ -45,7 +56,7 @@ class Graph:
     Functions
     ---------
     addNode(key, int, node)
-        adds a node to the graph
+
     addEdge(from_node, edge, distance)
         adds an edge from a given node to another with a given distance
     printGraph
@@ -58,18 +69,21 @@ class Graph:
         self.edges = {}
         self.nodes = {}
 
-    def addNode(self, key: int, node: Node = None) -> None:
-        if key not in self.nodes:
-            self.nodes[key] = node
+    def addNode(self, node: int | Node) -> None:
+        'add or update a node to the graph'
+        if type(node) is Node:
+            self.nodes[node.key] = node
+        elif type(node) is int:
+            self.nodes[node] = Node(node)
 
     def addEdge(self, from_node: int, edge: Edge | int, distance: float = 0) -> None:
+        'add an edge from a given node to another with a given distance, add node if it doesn\'t exists'
         if type(edge) is int:
             edge = Edge(edge, from_node)
+            # set distance for edge
+            edge.distance_between = distance
         else:
             edge.from_node = from_node
-
-        # set distance for edge
-        edge.distance_between = distance
 
         if from_node not in self.nodes:
             self.addNode(from_node)
