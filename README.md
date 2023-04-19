@@ -6,5 +6,12 @@
 - What does the code do and how
 - what technology is used
 
-## Algorithms
+
+## Algorithms and datastructures
 - Explain each algorithm use in the program
+#Dijkstra
+
+#Depth first search
+
+## User interface
+
