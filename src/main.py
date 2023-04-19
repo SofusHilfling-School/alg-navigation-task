@@ -12,11 +12,9 @@ from graph import Graph, Node
 @click.option('--dev', default=False, is_flag=True)
 @click.argument('start')
 @click.argument('destination')
-def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: int, destination: int):
+def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: int | str, destination: int | str):
     'Navigate between two points on a map, start and destination must both be keys specified in the map'
-    start = int(start)
-    destination = int(destination)
-
+    
     if dev:
         print(f"log: parameters: algorithm={algorithm}, pathonly={pathonly}, map={map}, dev={dev}, start={start}, destination={destination}")
 
@@ -25,12 +23,21 @@ def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: 
         print('log: graph edges')
         graph.printGraph()
 
-    alg = DepthFirstSearch(graph, start) if algorithm == 'dfs' else Dijkstra(graph, start)
-    if not alg.hasPathTo(destination):
+    startKey = parseNodeInput(graph, start)
+    if startKey == None:
+        print("Invalid value for START, either use the key or name for a valid node in the graph")
+        return
+    destinationKey = parseNodeInput(graph, destination)
+    if destinationKey == None:
+        print("Invalid value for DESTINATION, either use the key or name for a valid node in the graph")
+        return
+
+    alg = DepthFirstSearch(graph, startKey) if algorithm == 'dfs' else Dijkstra(graph, startKey)
+    if not alg.hasPathTo(destinationKey):
         print(f"There is no path between '{start}' and '{destination}'")
         return
 
-    path = alg.pathTo(destination)
+    path = alg.pathTo(destinationKey)
     if dev:
         print(f'log: path: {path}')
 
@@ -39,7 +46,7 @@ def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: 
         total += edge.distance_between
 
     if pathonly:
-        print(graph.nodes[start].name, end='')
+        print(graph.nodes[startKey].name, end='')
         for step in range(len(path)):
             edge = path.pop()
             node = graph.nodes[edge.to_node]
@@ -64,7 +71,7 @@ def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: 
             input('Press any key to continue...')
             print('\033[1A\033[K\r', end='')
         
-        print(f"🎉 You have arrived at destination '{graph.nodes[destination].name}' 🎉")
+        print(f"🎉 You have arrived at destination '{graph.nodes[destinationKey].name}' 🎉")
 
 def importGraph(filePath: str) -> Graph:
     with open(filePath) as file:
@@ -81,6 +88,16 @@ def importGraph(filePath: str) -> Graph:
             g.addEdge(int(fields[0]), int(fields[1]), float(fields[2]))
 
     return g
+
+def parseNodeInput(graph: Graph, input: str | int) -> int | None:
+    try:
+        return int(input)
+         
+    except ValueError as verr:
+        pass # do job to handle: s does not contain anything convertible to int
+
+    return graph.getKey(lambda n : n.name == input)
+
 
 if __name__ == '__main__':
     navigate()

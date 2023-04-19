@@ -1,3 +1,6 @@
+from typing import Callable
+
+
 class Edge:
     """
     Edge constructer class til en graf
@@ -100,3 +103,8 @@ class Graph:
             destinations = [str(e.to_node) for e in edges]
             
             print(f"{source}-->{', '.join(destinations)}")
+
+    def getKey(self, predicate: Callable[[Node], bool]) -> Node | None:
+        for k, v in self.nodes.items():
+            if(predicate(v)):
+                return k
