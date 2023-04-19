@@ -13,7 +13,13 @@ algorithms.
 
 ## Algorithms and datastructures
 - Explain each algorithm use in the program
+
 #Dijkstra
+Dijkstra function takes a graph(weighted) and a starting point,
+sets all edges to be an infinitly large value 
+then we go through all nodes and updates the weight,
+the weight is stored in a priority queue sorted by smallest weight
+
 
 #Depth first search
 
