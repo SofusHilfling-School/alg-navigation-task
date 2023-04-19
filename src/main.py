@@ -46,6 +46,7 @@ def navigate(algorithm: str, pathonly: bool, map: str | None, dev: bool, start: 
             node_name = node.name if node.name != None else node.key
             print(f' -> {node_name}', end='')
         print()
+        print(f"Total distance: {total}km")
     else:
         for step in range(len(path)):
             edge = path.pop()
