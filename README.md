@@ -26,3 +26,4 @@ the weight is stored in a priority queue sorted by smallest weight
 
 ## User interface
 
+![image](https://user-images.githubusercontent.com/19843915/233313150-6f9d6100-19b5-41a8-8b12-a083777cad82.png)
